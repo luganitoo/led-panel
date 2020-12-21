@@ -1,0 +1,74 @@
+html { 
+  color: white; 
+  font-family: Helvetica; 
+  display: inline-block; 
+  margin: 0px auto; 
+  text-align: center;
+  background: #282828;
+}
+
+#matrix {
+    width: 330px;
+    height: 270px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .matrix-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .matrix-cell {
+    background-color: black;
+    float: left;
+    height: 15px;
+    width: 22px;
+    margin: 5px;
+    box-shadow: 1px 1px 3px #b5b5b5;
+    cursor: pointer;
+  }
+  .center {
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .color-list-opt {
+    padding: 14px;
+    margin: 2px;
+    border-radius: 14px;
+    display: inline-block;
+  }
+  .color-list-opt.active {
+    box-shadow: 0px 0px 6px #fff;
+  }
+  #color-list-opt-w {
+    padding-top: 30px;
+  }
+
+.matrix-menu-btn, .matrix-mode-btn{
+    height: 30px;
+    width: 100px;
+    color: white;
+    box-shadow: 1px 1px 3px #acacac;
+    margin: 10px;
+    background: #575757;
+    cursor: pointer;
+    border:none;
+    font-weight: bolder;
+  }
+
+.matrix-menu-btn.active, .matrix-mode-btn.active  {
+  background: #d23b49;
+  
+}
+  
+#matrix-menu {
+  width: 330px;
+}
+
+.color-list-opt{
+  cursor: pointer;
+}
+

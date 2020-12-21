@@ -1,0 +1,55 @@
+html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}
+.button { background-color: #195B6A; border: none; color: white; padding: 16px 40px;
+text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}
+.button2 {background-color: #77878A;}
+
+
+#matrix {
+    color: #444;
+    width: 300px;
+    height: 200px;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .matrix-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .matrix-cell {
+    background-color: black;
+    outline: 1px solid white;
+    float: left;
+    height: 20px;
+    width: 30px;
+  }
+  .center {
+    margin: auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .qcs {
+    padding: 14px;
+    margin: 2px;
+    border-radius: 14px;
+    display: inline-block;
+  }
+  #qcs-w {
+    padding-top: 30px;
+  }
+
+  
+.matrix-menu-btn {
+    height: 30px;
+    width: 100px;
+    color: white;
+    border: 1px solid white;
+    margin: 10px;
+    background: #575757;
+  }
+  .matrix-menu-btn > span {
+    line-height: 30px;
+  }

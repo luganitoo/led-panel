@@ -1,0 +1,149 @@
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}
+.button { background-color: #195B6A; border: none; color: white; padding: 16px 40px;
+text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}
+.button2 {background-color: #77878A;}</style></head>
+<body style="background: #2d2c2c;"><h1>ESP8266 Web Server</h1>
+<p>Col 0 off</p>
+<p><a href="/col0/on"><button class="button">ON</button></a></p>
+<p>Col 1 off</p>
+<p><a href="/col1/on"><button class="button">ON</button></a></p>
+
+
+
+  <div id="matrix-menu" class="center">
+  
+  <div class="matrix-menu-btn" id="matrix-music"><span>Music<!--
+  span--></span></div><div class="matrix-menu-btn" id="matrix-all"><span>All</span></div>
+  <div class="matrix-menu-btn" id="matrix-col"><span>Column</span></div>
+  <div class="matrix-menu-btn" id="matrix-cell"><span>Cell</span></div>
+</div>
+
+ <div id="matrix" class="center">
+    <div class="matrix-column" id="col0"> 
+      <div class="matrix-cell" id="cel-09"></div>
+      <div class="matrix-cell" id="cel-08"></div>
+      <div class="matrix-cell" id="cel-07"></div>
+      <div class="matrix-cell" id="cel-06"></div>
+      <div class="matrix-cell" id="cel-05"></div>
+      <div class="matrix-cell" id="cel-04"></div>
+      <div class="matrix-cell" id="cel-03"></div>
+      <div class="matrix-cell" id="cel-02"></div>
+      <div class="matrix-cell" id="cel-01"></div>
+      <div class="matrix-cell" id="cel-00"></div>
+    </div>
+    <div class="matrix-column" id="col1">
+      <div class="matrix-cell" id="cel-19"></div>
+      <div class="matrix-cell" id="cel-18"></div>
+      <div class="matrix-cell" id="cel-17"></div>
+      <div class="matrix-cell" id="cel-16"></div>
+      <div class="matrix-cell" id="cel-15"></div>
+      <div class="matrix-cell" id="cel-14"></div>
+      <div class="matrix-cell" id="cel-13"></div>
+      <div class="matrix-cell" id="cel-12"></div>
+      <div class="matrix-cell" id="cel-11"></div>
+      <div class="matrix-cell" id="cel-10"></div>
+    </div>
+    <div class="matrix-column" id="col2>
+      <div class="matrix-cell" id="cel-29"></div>
+      <div class="matrix-cell" id="cel-28"></div>
+      <div class="matrix-cell" id="cel-27"></div>
+      <div class="matrix-cell" id="cel-26"></div>
+      <div class="matrix-cell" id="cel-25"></div>
+      <div class="matrix-cell" id="cel-24"></div>
+      <div class="matrix-cell" id="cel-23"></div>
+      <div class="matrix-cell" id="cel-22"></div>
+      <div class="matrix-cell" id="cel-21"></div>
+      <div class="matrix-cell" id="cel-20"></div>
+    </div>
+    <div class="matrix-column" id="col3">
+      <div class="matrix-cell" id="cel-39"></div>
+      <div class="matrix-cell" id="cel-38"></div>
+      <div class="matrix-cell" id="cel-37"></div>
+      <div class="matrix-cell" id="cel-36"></div>
+      <div class="matrix-cell" id="cel-35"></div>
+      <div class="matrix-cell" id="cel-34"></div>
+      <div class="matrix-cell" id="cel-33"></div>
+      <div class="matrix-cell" id="cel-32"></div>
+      <div class="matrix-cell" id="cel-31"></div>
+      <div class="matrix-cell" id="cel-30"></div>
+    </div>
+    <div class="matrix-column" id="col4>
+      <div class="matrix-cell" id="cel-49"></div>
+      <div class="matrix-cell" id="cel-48"></div>
+      <div class="matrix-cell" id="cel-47"></div>
+      <div class="matrix-cell" id="cel-46"></div>
+      <div class="matrix-cell" id="cel-45"></div>
+      <div class="matrix-cell" id="cel-44"></div>
+      <div class="matrix-cell" id="cel-43"></div>
+      <div class="matrix-cell" id="cel-42"></div>
+      <div class="matrix-cell" id="cel-41"></div>
+      <div class="matrix-cell" id="cel-40"></div>
+    </div>
+    <div class="matrix-column" id="col5>
+      <div class="matrix-cell" id="cel-59"></div>
+      <div class="matrix-cell" id="cel-58"></div>
+      <div class="matrix-cell" id="cel-57"></div>
+      <div class="matrix-cell" id="cel-56"></div>
+      <div class="matrix-cell" id="cel-55"></div>
+      <div class="matrix-cell" id="cel-54"></div>
+      <div class="matrix-cell" id="cel-53"></div>
+      <div class="matrix-cell" id="cel-52"></div>
+      <div class="matrix-cell" id="cel-51"></div>
+      <div class="matrix-cell" id="cel-50"></div>
+    </div>
+    <div class="matrix-column" id="col6>
+      <div class="matrix-cell" id="cel-69"></div>
+      <div class="matrix-cell" id="cel-68"></div>
+      <div class="matrix-cell" id="cel-67"></div>
+      <div class="matrix-cell" id="cel-66"></div>
+      <div class="matrix-cell" id="cel-65"></div>
+      <div class="matrix-cell" id="cel-64"></div>
+      <div class="matrix-cell" id="cel-63"></div>
+      <div class="matrix-cell" id="cel-62"></div>
+      <div class="matrix-cell" id="cel-61"></div>
+      <div class="matrix-cell" id="cel-60"></div>
+    </div>
+    <div class="matrix-column" id="col7">
+      <div class="matrix-cell" id="cel-79"></div>
+      <div class="matrix-cell" id="cel-78"></div>
+      <div class="matrix-cell" id="cel-77"></div>
+      <div class="matrix-cell" id="cel-76"></div>
+      <div class="matrix-cell" id="cel-75"></div>
+      <div class="matrix-cell" id="cel-74"></div>
+      <div class="matrix-cell" id="cel-73"></div>
+      <div class="matrix-cell" id="cel-72"></div>
+      <div class="matrix-cell" id="cel-71"></div>
+      <div class="matrix-cell" id="cel-70"></div>
+    </div>
+    <div class="matrix-column" id="col8">
+      <div class="matrix-cell" id="cel-89"></div>
+      <div class="matrix-cell" id="cel-88"></div>
+      <div class="matrix-cell" id="cel-87"></div>
+      <div class="matrix-cell" id="cel-86"></div>
+      <div class="matrix-cell" id="cel-85"></div>
+      <div class="matrix-cell" id="cel-84"></div>
+      <div class="matrix-cell" id="cel-83"></div>
+      <div class="matrix-cell" id="cel-82"></div>
+      <div class="matrix-cell" id="cel-81"></div>
+      <div class="matrix-cell" id="cel-80"></div>
+    </div>
+    <div class="matrix-column" id="col9">
+      <div class="matrix-cell" id="cel-99"></div>
+      <div class="matrix-cell" id="cel-98"></div>
+      <div class="matrix-cell" id="cel-97"></div>
+      <div class="matrix-cell" id="cel-96"></div>
+      <div class="matrix-cell" id="cel-95"></div>
+      <div class="matrix-cell" id="cel-94"></div>
+      <div class="matrix-cell" id="cel-93"></div>
+      <div class="matrix-cell" id="cel-92"></div>
+      <div class="matrix-cell" id="cel-91"></div>
+      <div class="matrix-cell" id="cel-90"></div>
+    </div>
+  </div>
+
+<div id="qcs-w" style="display: block;"> <div class="qcs" onclick="pC('#ff0000');" style="background-color:#ff0000;"></div> <div class="qcs" onclick="pC('#ffa000');" style="background-color:#ffa000;"></div> <div class="qcs" onclick="pC('#ffc800');" style="background-color:#ffc800;"></div> <div class="qcs" onclick="pC('#ffe0a0');" style="background-color:#ffe0a0;"></div> <div class="qcs" onclick="pC('#ffffff');" style="background-color:#ffffff;"></div> <div class="qcs qcsb" onclick="pC('#000000');" style="background-color:#000000;"></div><br> <div class="qcs" onclick="pC('#ff00ff');" style="background-color:#ff00ff;"></div> <div class="qcs" onclick="pC('#0000ff');" style="background-color:#0000ff;"></div> <div class="qcs" onclick="pC('#00ffc8');" style="background-color:#00ffc8;"></div> <div class="qcs" onclick="pC('#08ff00');" style="background-color:#08ff00;"></div> <div class="qcs" onclick="pC('rnd');" style="background-color:var(--c-3);padding:4px 8px;transform:translateY(-10px);">R</div> </div>
+  
+  
+</body><style type="text/css"></style></html>
