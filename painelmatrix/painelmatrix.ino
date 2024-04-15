@@ -7,7 +7,7 @@ const char* ssid     = "UAIFAI";
 const char* password = "em313mar";
 
 // Set web server port number to 80
-WiFiServer server(80);
+//WiFiServer server(80);
 
 // Variable to store the HTTP request
 String header;
@@ -53,7 +53,11 @@ int filter = 220;
 int i, j;
 //////////VARIABLES//////////
 
+#include <FS.h>
+#include <ESPAsyncWebServer.h>
 
+// Create AsyncWebServer object on port 80
+AsyncWebServer server(80);
 
 
 void setup() {
@@ -70,7 +74,7 @@ void setup() {
     //////////FASTLED//////////
     delay( 3000 );
     FastLED.addLeds<WS2811, LED_PIN, GRB>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
-    FastLED.setBrightness(  200 );
+    FastLED.setBrightness(  255 );
     //////////FASTLED//////////
 
     // Connect to Wi-Fi network with SSID and password
@@ -86,8 +90,33 @@ void setup() {
     Serial.println("WiFi connected.");
     Serial.println("IP address: ");
     Serial.println(WiFi.localIP());
-    server.begin();
+    //server.begin();
 
+    // File system
+    SPIFFS.begin();
+
+    // Route for root / web page
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+      request->send(SPIFFS, "/index.html", String());
+    });
+
+    // Route to load style.css file
+    server.on("/style.css", HTTP_GET, [](AsyncWebServerRequest *request){
+      request->send(SPIFFS, "/style.css", "text/css");
+    });
+
+    // Route to load style.css file
+    server.on("/script.js", HTTP_GET, [](AsyncWebServerRequest *request){
+      request->send(SPIFFS, "/script.js", "text/javascript");
+    });
+
+      // Route to set GPIO to HIGH
+    server.on("/music", HTTP_GET, [](AsyncWebServerRequest *request){
+      playMusic();    
+      request->send(SPIFFS, "/index.html", String());
+    });
+
+    server.begin();
 
 }
 
@@ -143,41 +172,41 @@ void loop(){
               FastLED.delay(1);
             }
             
-            // Display the HTML web page
-            client.println("<!DOCTYPE html><html>");
-            client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
-            client.println("<link rel=\"icon\" href=\"data:,\">");
-            // CSS to style the on/off buttons 
-            // Feel free to change the background-color and font-size attributes to fit your preferences
-            client.println("<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}");
-            client.println(".button { background-color: #195B6A; border: none; color: white; padding: 16px 40px;");
-            client.println("text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}");
-            client.println(".button2 {background-color: #77878A;}</style></head>");
+            // // Display the HTML web page
+            // client.println("<!DOCTYPE html><html>");
+            // client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
+            // client.println("<link rel=\"icon\" href=\"data:,\">");
+            // // CSS to style the on/off buttons 
+            // // Feel free to change the background-color and font-size attributes to fit your preferences
+            // client.println("<style>html { font-family: Helvetica; display: inline-block; margin: 0px auto; text-align: center;}");
+            // client.println(".button { background-color: #195B6A; border: none; color: white; padding: 16px 40px;");
+            // client.println("text-decoration: none; font-size: 30px; margin: 2px; cursor: pointer;}");
+            // client.println(".button2 {background-color: #77878A;}</style></head>");
             
-            // Web Page Heading
-            client.println("<body><h1>ESP8266 Web Server</h1>");
+            // // Web Page Heading
+            // client.println("<body><h1>ESP8266 Web Server</h1>");
             
-            // Display current state, and ON/OFF buttons for GPIO 5  
-            client.println("<p>Col 0 " + Col0State + "</p>");
-            // If the Col0State is off, it displays the ON button       
-            if (Col0State=="off") {
-              client.println("<p><a href=\"/col0/on\"><button class=\"button\">ON</button></a></p>");
-            } else {
-              client.println("<p><a href=\"/col0/off\"><button class=\"button button2\">OFF</button></a></p>");
-            } 
+            // // Display current state, and ON/OFF buttons for GPIO 5  
+            // client.println("<p>Col 0 " + Col0State + "</p>");
+            // // If the Col0State is off, it displays the ON button       
+            // if (Col0State=="off") {
+            //   client.println("<p><a href=\"/col0/on\"><button class=\"button\">ON</button></a></p>");
+            // } else {
+            //   client.println("<p><a href=\"/col0/off\"><button class=\"button button2\">OFF</button></a></p>");
+            // } 
                
-            // Display current state, and ON/OFF buttons for GPIO 4  
-            client.println("<p>Col 1 " + Col1State + "</p>");
-            // If the Col1State is off, it displays the ON button       
-            if (Col1State=="off") {
-              client.println("<p><a href=\"/col1/on\"><button class=\"button\">ON</button></a></p>");
-            } else {
-              client.println("<p><a href=\"/col1/off\"><button class=\"button button2\">OFF</button></a></p>");
-            }
-            client.println("</body></html>");
+            // // Display current state, and ON/OFF buttons for GPIO 4  
+            // client.println("<p>Col 1 " + Col1State + "</p>");
+            // // If the Col1State is off, it displays the ON button       
+            // if (Col1State=="off") {
+            //   client.println("<p><a href=\"/col1/on\"><button class=\"button\">ON</button></a></p>");
+            // } else {
+            //   client.println("<p><a href=\"/col1/off\"><button class=\"button button2\">OFF</button></a></p>");
+            // }
+            // client.println("</body></html>");
             
-            // The HTTP response ends with another blank line
-            client.println();
+            // // The HTTP response ends with another blank line
+            // client.println();
             // Break out of the while loop
             break;
           } else { // if you got a newline, then clear currentLine
@@ -228,4 +257,41 @@ void ledColumn(int colNum, int spectrumValue, CRGB color){
       }
     }
   }
+}
+
+
+void playMusic(){
+  //MSGEQ7
+  digitalWrite(resetPin, HIGH);
+  digitalWrite(resetPin, LOW);
+  for (i = 0; i < 5; i++) {
+    delayMicroseconds(36);
+    digitalWrite(strobePin, LOW);
+    delayMicroseconds(18);
+    spectrumValue[i] = analogRead(analogPin);
+    spectrumValue[i] = constrain(spectrumValue[i], filter, 1023);
+    spectrumValueEven[i] = map(spectrumValue[i], filter, 1023, 0, 30);
+    spectrumValueOdd[i] = map(spectrumValue[i], filter, 1023, 30, 0);
+    Serial.print(spectrumValueEven[i]);
+    Serial.print("/");
+    Serial.print(spectrumValueOdd[i]);
+    Serial.print(" - ");
+    delayMicroseconds(18);
+    digitalWrite(strobePin, HIGH);
+  }
+  Serial.println();
+
+  //////////+++FASTLED+++//////////
+   ledColumn(0, spectrumValueEven[0], red);
+   ledColumn(1, spectrumValueOdd[1], orange);
+   ledColumn(2, spectrumValueEven[2], green);
+   ledColumn(3, spectrumValueOdd[3], blue);
+   ledColumn(4, spectrumValueEven[4], violet);
+   ledColumn(5, spectrumValueOdd[4], violet);
+   ledColumn(6, spectrumValueEven[3], blue);
+   ledColumn(7, spectrumValueOdd[2], green);
+   ledColumn(8, spectrumValueEven[1], orange);
+   ledColumn(9, spectrumValueOdd[0], red);
+   FastLED.show();
+   FastLED.delay(1);
 }
